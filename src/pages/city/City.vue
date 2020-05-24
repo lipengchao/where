@@ -11,6 +11,7 @@ import CityHeader from './components/Header'
 import CitySearch from './components/Search'
 import CityList from './components/List'
 import CityAlphabet from './components/Alphabet'
+import axios from 'axios'
 export default {
   components: {
     CityHeader,
@@ -30,7 +31,7 @@ export default {
   },
   methods: {
     async getCityInfo () {
-      const { data: res } = await this.$http.get('/api/city.json')
+      const { data: res } = await axios.get('/api/city.json')
       if (!res.ret) return
       this.cities = res.data.cities
       this.hotCities = res.data.hotCities

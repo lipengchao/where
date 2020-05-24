@@ -1,11 +1,8 @@
-import Vue from 'vue'
 import Vuex from 'vuex'
 import state from './state'
 import mutations from './mutations'
 
-Vue.use(Vuex)
-
-export default new Vuex.Store({
+export default Vuex.createStore({
   state,
   // 如果有异步操作或者批量操作使用actions
   // actions: {
@@ -21,4 +18,4 @@ export default new Vuex.Store({
       return state.city + ' ' + state.city
     }
   }
-});
+})

@@ -5,7 +5,7 @@
         <div class="title border-topbottom">您当前所在的位置</div>
         <div class="btn-list">
           <div class="btn-wrapper">
-            <div class="btn">{{ this.city }}</div>
+            <div class="btn">{{ city }}</div>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@ export default {
   watch: {
     letter () {
       if (this.letter) {
-        const element = this.$refs[this.letter][0]
+        const element = this.$refs[this.letter]
         this.scroll.scrollToElement(element)
       }
     }

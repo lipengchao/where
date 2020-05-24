@@ -12,7 +12,7 @@
         <!-- 第一种方式 -->
         <!-- {{ this.$store.state.city }} -->
         <!-- 第二种方式 -->
-        {{ this.city }}
+        {{ city }}
         <!-- 练习使用vuex中getters -->
         <!-- {{ this.doubleCity }} -->
         <span class="iconfont iconjiantou arrow-icon"></span>

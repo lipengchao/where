@@ -35,7 +35,8 @@ export default {
   // 当页面数据更新并且完成自己渲染时候执行
   updated () {
     // 计算字母A到搜索框的距离
-    this.startY = this.$refs['A'][0].offsetTop
+    // eslint-disable-next-line dot-notation
+    this.startY = this.$refs['A'].offsetTop
   },
   methods: {
     // 点击字母列表显示对应的城市
@@ -74,7 +75,7 @@ export default {
     letters () {
       // ['A', 'B', 'C']
       const letters = []
-      for (let key in this.cities) {
+      for (const key in this.cities) {
         letters.push(key)
       }
       return letters

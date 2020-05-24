@@ -60,7 +60,7 @@ export default {
       // 添加timer提高性能
       this.timer = setTimeout(() => {
         const result = []
-        for (let key in this.cities) {
+        for (const key in this.cities) {
           this.cities[key].forEach(value => {
             if (value.spell.indexOf(this.keyword) > -1 || value.name.indexOf(this.keyword) > -1) {
               result.push(value)

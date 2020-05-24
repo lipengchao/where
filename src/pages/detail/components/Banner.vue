@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="banner" @click="handleBannerClick">
-      <img class="banner-img" :src="this.bannerImg" alt="">
+      <img class="banner-img" :src="bannerImg" alt="">
       <div class="banner-info">
-        <div class="banner-title">{{ this.sightName }}</div>
-        <div class="banner-number"><span class="iconfont icontupian banner-icon"></span>{{ this.gallaryImgs.length }}</div>
+        <div class="banner-title">{{ sightName }}</div>
+        <div class="banner-number"><span class="iconfont icontupian banner-icon"></span>{{ gallaryImgs.length }}</div>
       </div>
     </div>
     <fade-animation>
@@ -24,7 +24,10 @@ import FadeAnimation from 'common/fade/FadeAnimation'
 export default {
   name: 'DetailBanner',
   props: {
-    bannerImg: String,
+    bannerImg: {
+      type: String,
+      default: ''
+    },
     gallaryImgs: Array,
     sightName: String
   },
@@ -64,7 +67,7 @@ export default {
     bottom: 0
     line-height: .6rem
     color: #fff
-    background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, .8))
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0), rgba(0, 0, 0, .8))
     .banner-title
       flex: 1
       font-size: .32rem

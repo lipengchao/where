@@ -1,3 +1,10 @@
+<!--
+ * @Description:
+ * @Author: 雪中无处寻
+ * @Date: 2020-05-24 14:21:36
+ * @LastEditTime: 2020-05-24 15:56:28
+ * @LastEditors: 雪中无处寻
+-->
 <template>
   <div class="container" @click="handleGallaryClick">
     <div class="wrapper">
