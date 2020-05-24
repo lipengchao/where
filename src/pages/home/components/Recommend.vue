@@ -5,7 +5,7 @@
       <!-- tag="li" 将router-link渲染成li标签 -->
       <router-link
         tag="li"
-        class="item border-bottom"
+        class="itemlink border-bottom"
         v-for="item in list"
         :key="item.id"
         :to="'/detail/' + item.id"
@@ -38,7 +38,7 @@ export default {
   text-indent: 0.2rem;
 }
 
-.item {
+.itemlink {
   overflow: hidden;
   display: flex;
   height: 1.9rem;

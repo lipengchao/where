@@ -54,7 +54,7 @@ function useLetterLogic () {
   let letter = ref('')
   // 获取字母组件传过来的值
   function handleLetterChange(selected) {
-    letter.value = letter
+    letter.value = selected
   }
   return { letter, handleLetterChange }
 

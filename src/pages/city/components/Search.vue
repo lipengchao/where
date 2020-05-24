@@ -18,63 +18,67 @@
 
 <script>
 import Bscroll from 'better-scroll'
-import { mapMutations } from 'vuex'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+import { onMounted, ref, watch, computed } from 'vue'
 export default {
   name: 'CitySearch',
   props: {
     cities: Object
   },
-  data () {
-    return {
-      keyword: '',
-      list: [],
-      // 节流
-      timer: null
-    }
-  },
-  methods: {
-    handleCityClick (city) {
+  setup(props) {
+    let keyword = ref('')
+    let list = ref([])
+    let timer = null
+    const search = ref(null)
+    
+    const store = useStore()
+    const router = useRouter()
+
+    function handleCityClick (city) {
       // 触发mutations中的changeCity方法
-      // 第一种方式
-      // this.$store.commit('changeCity', city)
-      this.changeCity(city)
-      this.$router.push('/')
-      this.keyword = ''
-    },
-    // 第二种方式
-    ...mapMutations(['changeCity'])
-  },
-  mounted () {
-    // 添加滑动效果
-    this.scroll = new Bscroll(this.$refs.search)
-  },
-  watch: {
-    keyword () {
-      if (this.timer) {
-        clearTimeout(this.timer)
+      store.commit('changeCity', city)
+      router.push('/')
+      keyword = ''
+    }
+
+    onMounted(() => {
+      // 添加滑动效果
+      new Bscroll(search.value)
+    })
+
+    watch(keyword, (keyword, oldKeyWord) => {
+      if (timer) {
+        clearTimeout(timer)
       }
-      if (!this.keyword) {
-        this.list = []
+      if (!keyword) {
+        list.value = []
         return
       }
       // 添加timer提高性能
-      this.timer = setTimeout(() => {
+      timer = setTimeout(() => {
         const result = []
-        for (const key in this.cities) {
-          this.cities[key].forEach(value => {
-            if (value.spell.indexOf(this.keyword) > -1 || value.name.indexOf(this.keyword) > -1) {
+        for (const key in props.cities) {
+          props.cities[key].forEach(value => {
+            if (value.spell.indexOf(keyword) > -1 || value.name.indexOf(keyword) > -1) {
               result.push(value)
             }
           })
         }
-        this.list = result
+        list.value = result
       }, 100)
-    }
-  },
-  computed: {
-    // 判断是否有搜索列表数据
-    hasNoData () {
-      return !this.list.length
+    })
+
+    const hasNoData = computed(() => {
+      return !list.value.length
+    })
+
+    return {
+      hasNoData,
+      keyword,
+      handleCityClick,
+      list,
+      search
     }
   }
 }
