@@ -14,24 +14,21 @@
   </div>
 </template>
 <script>
+import { computed } from 'vue'
 export default {
   name: 'HomeIcons',
   props: {
     list: Array
   },
-  data () {
-    return {
-      swiperOption: {
+  setup(props) {
+    const swiperOption = {
         pagination: '.icons-pagination',
         autoplay: false
-      }
     }
-  },
-  computed: {
-    // 判断当前图标有几页
-    pages () {
+    const pages = computed(() => {
+      // 判断当前图标有几页
       const pages = []
-      this.list.forEach((item, index) => {
+      props.list.forEach((item, index) => {
         // 如果page = 0 则图标应该显示在第1页上
         // 如果page = 1 则图标应该显示在第2页上
         const page = Math.floor(index / 8)
@@ -41,7 +38,9 @@ export default {
         pages[page].push(item)
       })
       return pages
-    }
+    })
+
+    return {swiperOption, pages}
   }
 }
 </script>

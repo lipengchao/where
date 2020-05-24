@@ -1,10 +1,3 @@
-<!--
- * @Description: 
- * @Author: 雪中无处寻
- * @Date: 2020-05-24 14:22:25
- * @LastEditTime: 2020-05-24 16:22:42
- * @LastEditors: 雪中无处寻
---> 
 <template>
   <div class="wrapper">
     <swiper :options="swiperOption" v-if="showSwiper">
@@ -18,28 +11,26 @@
   </div>
 </template>
 <script>
+import { computed } from 'vue'
 export default {
   name: 'HomeSwiper',
   props: {
     list: Array
   },
-  data () {
-    return {
-      swiperOption: {
-        pagination: '.swiper-pagination',
-        autoplay: 5000,
-        // 用户操作swiper之后，是否禁止autoplay
-        autoplayDisableOnInteraction: false,
-        // 循环播放
-        loop: true
-      }
+  setup(props) {
+    const swiperOption = {
+      pagination: '.swiper-pagination',
+      autoplay: 5000,
+      // 用户操作swiper之后，是否禁止autoplay
+      autoplayDisableOnInteraction: false,
+      // 循环播放
+      loop: true
     }
-  },
-  computed: {
-    // 判断list是否有数据
-    showSwiper () {
-      return this.list.length
-    }
+
+    const showSwiper = computed(() => {
+      return props.list.length
+    })
+    return {swiperOption, showSwiper}
   }
 }
 </script>

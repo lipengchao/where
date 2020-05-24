@@ -21,14 +21,21 @@
   </div>
 </template>
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { useStore } from 'vuex'
+import { computed } from 'vue'
 export default {
   name: 'HomeHeader',
-  computed: {
-    // 第二种方式
-    ...mapState(['city']),
-    ...mapGetters(['doubleCity'])
+  setup() {
+    const store = useStore()
+    const city = computed(() => {
+      return store.state.city
+    })
+    return {city}
   }
+  // computed: {
+  //   ...mapState(['city']),
+  //   ...mapGetters(['doubleCity'])
+  // }
 }
 </script>
 <style lang="stylus" scoped>
