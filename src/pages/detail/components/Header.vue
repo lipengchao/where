@@ -13,39 +13,40 @@
 </template>
 
 <script>
+import { reactive, ref, onMounted, onUnmounted } from 'vue'
 export default {
   name: 'DetailHeader',
-  data () {
-    return {
-      showAbs: true,
-      opacityStyle: {
-        opacity: 0
-      }
-    }
-  },
-  methods: {
-    handleScroll () {
+  setup() {
+    let showAbs = ref(false)
+    const opacityStyle = reactive({
+      opacity: 0
+    })
+
+    function handleScroll () {
       // 采用兼容性写法，防止浏览器不兼容
       const top = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       if (top > 60) {
         let opacity = top / 140
         opacity = opacity > 1 ? 1 : opacity
-        this.opacityStyle = {
-          opacity
-        }
-        this.showAbs = false
+        opacityStyle.opacity = opacity
+        showAbs.value = false
       } else {
-        this.showAbs = true
+        showAbs.value = true
       }
     }
-  },
-  activated () {
-    window.addEventListener('scroll', this.handleScroll)
-  },
-  // 离开当前页面时触发
-  deactivated () {
-    // 解绑scroll事件
-    window.removeEventListener('scroll', this.handleScroll)
+
+    onMounted(() => {
+      window.addEventListener('scroll', handleScroll)
+    })
+
+    onUnmounted(() => {
+      window.removeEventListener('scroll', handleScroll)
+    })
+
+    return {
+      showAbs,
+      opacityStyle
+    }
   }
 }
 </script>
